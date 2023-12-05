@@ -25,7 +25,6 @@ class IsPrivate(BoundFilter):
 
 @dp.message_handler(IsPrivate(), chat_id=ADMINS, commands="start")
 async def admin_start_handler(message: types.Message):
-    print(message)
     text = "Bir marttalik link olish uchun pastdagi tugmadan foydalaning"
     await message.answer(text=text, reply_markup=generate_link_button)
 
