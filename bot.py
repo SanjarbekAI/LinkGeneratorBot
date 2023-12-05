@@ -16,7 +16,7 @@ generate_link_button = ReplyKeyboardMarkup(
 )
 
 
-@dp.message_handler(commands="start", chat_id=ADMINS)
+@dp.message_handler(commands="start")
 async def admin_start_handler(message: types.Message):
     print(message)
     text = "Bir marttalik link olish uchun pastdagi tugmadan foydalaning"
@@ -26,7 +26,8 @@ async def admin_start_handler(message: types.Message):
 @dp.message_handler(text="🔗 Link olish")
 async def create_invite_link(message: types.Message):
     try:
-        chat_id = -1002140470690
+        # chat_id = -1002140470690
+        chat_id = -1001922060151
         result = await bot.create_chat_invite_link(chat_id=chat_id, member_limit=1)
         invite_link = result.invite_link
 
