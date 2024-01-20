@@ -1,10 +1,15 @@
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.dispatcher.filters import BoundFilter
 
-API_TOKEN = '6432695102:AAFgw8IcBv9PYLLG98oCaHRYMY3NMhwJ0BQ'
-# API_TOKEN = 'another bot token'
+from environs import Env
+
+env = Env()
+env.read_env()
+
+API_TOKEN = env.str("TOKEN")
+CHANNEL_ID = env.str("CHANNEL_ID")
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
@@ -32,8 +37,7 @@ async def admin_start_handler(message: types.Message):
 @dp.message_handler(IsPrivate(), chat_id=ADMINS, text="🔗 Link olish")
 async def create_invite_link(message: types.Message):
     try:
-        # chat_id = -1002140470690 # test version
-        chat_id = -1001922060151
+        chat_id = CHANNEL_ID
         result = await bot.create_chat_invite_link(chat_id=chat_id, member_limit=1)
         invite_link = result.invite_link
 
